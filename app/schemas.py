@@ -30,6 +30,13 @@ class FundingSource(BaseModel):
     timestamp: datetime
     source_type: str | None = None
 
+class BrowserData(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    user_agent: str | None = None
+    platform: str | None = None
+    fonts: list[str] = Field(default_factory=list)
+    webgl_renderer: str | None = None
 
 class Fingerprint(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -39,6 +46,9 @@ class Fingerprint(BaseModel):
     interaction_sequence: list[str] = Field(default_factory=list)
     account_age_days: int = Field(default=0, ge=0)
     unique_contracts: int = Field(default=0, ge=0)
+    
+
+    browser_data: BrowserData | None = None
 
 
 class AnalyzeRequest(BaseModel):
