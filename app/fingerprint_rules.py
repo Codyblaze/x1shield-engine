@@ -63,3 +63,41 @@ class FontEnumerationRule(HeuristicRule):
             result.detail = "Font fingerprinting completely blocked or empty."
 
         return result
+ class WebGLSpoofingRule(HeuristicRule):
+    name = "webgl_hardware_spoofing"
+    weight = 1.5
+
+    def __init__(self):
+        
+        self.software_renderers = ["swiftshader", "llvmpipe", "google", "mesa offscreen"]
+       
+        self.apple_gpus = ["apple m1", "apple m2", "apple m3", "apple gpu"]
+
+    def evaluate(self, fingerprint: Fingerprint) -> RuleResult:
+        result = RuleResult(name=self.name, tripped=False, score=0.0, detail=None)
+        
+        browser = fingerprint.browser_data
+        if not browser or not browser.webgl_renderer:
+            return result
+
+        renderer = browser.webgl_renderer.lower()
+        platform = (browser.platform or "").lower()
+
+        
+        if any(sw in renderer for sw in self.software_renderers):
+            result.tripped = True
+            result.score = 75.0
+            result.detail = f"Software renderer detected ({renderer}). High probability of headless VM."
+            return result
+
+        
+        is_apple_gpu = any(mac_gpu in renderer for mac_gpu in self.apple_gpus)
+        is_mac_platform = "mac" in platform
+
+        if is_apple_gpu and not is_mac_platform:
+            result.tripped = True
+            result.score = 85.0
+            result.detail = f"Impossible hardware mismatch: Apple GPU claimed on {platform} platform."
+            return result
+
+        return result   

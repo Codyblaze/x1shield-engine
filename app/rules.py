@@ -4,6 +4,7 @@ import math
 import statistics
 from abc import ABC, abstractmethod
 from app.fingerprint_rules import PlatformMismatchRule, FontEnumerationRule
+from app.fingerprint_rules import PlatformMismatchRule, FontEnumerationRule, WebGLSpoofingRule
 from collections import Counter
 
 from app.schemas import Fingerprint, RuleResult
@@ -174,4 +175,5 @@ DEFAULT_RULES: list[HeuristicRule] = [
     PredictableInteractionRule(),
     PlatformMismatchRule(),
     FontEnumerationRule(),
+    WebGLSpoofingRule(),
 ]
