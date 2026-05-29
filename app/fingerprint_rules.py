@@ -35,8 +35,6 @@ class PlatformMismatchRule(HeuristicRule):
                 result.detail = f"UA claims {claimed_os} but platform is {hw_platform}"
 
         return result
-
-
 class FontEnumerationRule(HeuristicRule):
     name = "font_enumeration_anomaly"
     weight = 1.0
@@ -63,7 +61,7 @@ class FontEnumerationRule(HeuristicRule):
             result.detail = "Font fingerprinting completely blocked or empty."
 
         return result
- class WebGLSpoofingRule(HeuristicRule):
+class WebGLSpoofingRule(HeuristicRule):
     name = "webgl_hardware_spoofing"
     weight = 1.5
 
