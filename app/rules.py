@@ -173,6 +173,7 @@ from app.fingerprint_rules import (
     PlatformMismatchRule,
     WebGLSpoofingRule,
 )
+from app.network_rules import DatacenterIPRule, IPRotationRule
 
 DEFAULT_RULES: list[HeuristicRule] = [
     TransactionVelocityRule(),
@@ -181,4 +182,6 @@ DEFAULT_RULES: list[HeuristicRule] = [
     PlatformMismatchRule(),
     FontEnumerationRule(),
     WebGLSpoofingRule(),
+    DatacenterIPRule(),
+    IPRotationRule(),
 ]

@@ -38,6 +38,13 @@ class BrowserData(BaseModel):
     fonts: list[str] = Field(default_factory=list)
     webgl_renderer: str | None = None
 
+
+class NetworkData(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
+    ip_address: str | None = None
+    recent_ips: list[str] = Field(default_factory=list)
+
 class Fingerprint(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
@@ -49,6 +56,7 @@ class Fingerprint(BaseModel):
     
 
     browser_data: BrowserData | None = None
+    network: NetworkData | None = None
 
 
 class AnalyzeRequest(BaseModel):
