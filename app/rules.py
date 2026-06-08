@@ -3,8 +3,6 @@ from __future__ import annotations
 import math
 import statistics
 from abc import ABC, abstractmethod
-from app.fingerprint_rules import PlatformMismatchRule, FontEnumerationRule
-from app.fingerprint_rules import PlatformMismatchRule, FontEnumerationRule, WebGLSpoofingRule
 from collections import Counter
 
 from app.schemas import Fingerprint, RuleResult
@@ -168,6 +166,13 @@ class PredictableInteractionRule(HeuristicRule):
                 return size
         return 0
 
+
+
+from app.fingerprint_rules import (
+    FontEnumerationRule,
+    PlatformMismatchRule,
+    WebGLSpoofingRule,
+)
 
 DEFAULT_RULES: list[HeuristicRule] = [
     TransactionVelocityRule(),
