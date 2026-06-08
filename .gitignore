@@ -11,3 +11,10 @@ dist/
 build/
 .idea/
 .vscode/
+*.code-profile
+
+# Internal Planning
+DEMO_SCRIPT.md
+*roadmap*
+*todo*
+*draft*
