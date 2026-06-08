@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 import statistics
 from abc import ABC, abstractmethod
+from app.fingerprint_rules import PlatformMismatchRule, FontEnumerationRule
 from collections import Counter
 
 from app.schemas import Fingerprint, RuleResult
@@ -171,4 +172,6 @@ DEFAULT_RULES: list[HeuristicRule] = [
     TransactionVelocityRule(),
     FundingSourceClusteringRule(),
     PredictableInteractionRule(),
+    PlatformMismatchRule(),
+    FontEnumerationRule(),
 ]
